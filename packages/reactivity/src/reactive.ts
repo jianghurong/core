@@ -86,6 +86,8 @@ export type UnwrapNestedRefs<T> = T extends Ref ? T : UnwrapRefSimple<T>
  * count.value // -> 1
  * ```
  */
+// 函数声明和函数实现可以分开。这种情况通常被称为“函数提升”，
+// 也就是说，在编译时 TypeScript 会把函数声明提升到代码的最顶部。
 export function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 export function reactive(target: object) {
   // if trying to observe a readonly proxy, return the readonly version.
@@ -179,11 +181,11 @@ export function shallowReadonly<T extends object>(target: T): Readonly<T> {
 }
 
 function createReactiveObject(
-  target: Target,
-  isReadonly: boolean,
-  baseHandlers: ProxyHandler<any>,
-  collectionHandlers: ProxyHandler<any>,
-  proxyMap: WeakMap<Target, any>
+  target: Target, // 要创建为响应式对象的对象
+  isReadonly: boolean, // 一个布尔值，指示创建的响应式对象是否为只读。如果为 true，则不允许修改该对象的属性。
+  baseHandlers: ProxyHandler<any>, // 一个对象，定义了用于处理基本操作（例如取值和赋值）的代理处理程序。
+  collectionHandlers: ProxyHandler<any>, // 一个对象，定义了用于处理集合操作（例如添加和删除元素）的代理处理程序。
+  proxyMap: WeakMap<Target, any> // 一个 WeakMap，用于跟踪已创建的代理。
 ) {
   if (!isObject(target)) {
     if (__DEV__) {

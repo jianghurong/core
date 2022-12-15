@@ -1,0 +1,21 @@
+<script src="../../dist/vue.global.js"></script>
+
+<div id="app">
+  {{ message }}
+</div>
+
+<script>
+const { createApp, reactive } = Vue
+
+createApp({
+	setup() {
+		debugger
+		const message = reactive({
+			text: 'vue3 message'
+		})
+	}
+}).mount('#app')
+</script>
+
+<style>
+</style>
