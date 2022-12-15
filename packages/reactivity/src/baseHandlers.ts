@@ -111,6 +111,15 @@ function createGetter(isReadonly = false, shallow = false) {
           ? shallowReactiveMap
           : reactiveMap
         ).get(target)
+      /**
+       * 							是 只读浅处理表
+       * 			是 是否浅处理 =>
+       * 						 	否 只读表
+       * 是否只读=>
+       * 							是 响应式浅处理表
+       * 			否 是否浅处理 =>
+       * 							否 响应式表
+       */
     ) {
       return target
     }

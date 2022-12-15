@@ -9,10 +9,15 @@ const { createApp, reactive } = Vue
 
 createApp({
 	setup() {
-		debugger
 		const message = reactive({
-			text: 'vue3 message'
+			// text: 'vue3 message',
+			// __v_isReactive: {
+			// 	b: 1
+			// },
+			// __v_isReadonly: 'ok1'
 		})
+		console.log(message.__v_isReactive)
+		console.log(message.__v_isReadonly)
 	}
 }).mount('#app')
 </script>
